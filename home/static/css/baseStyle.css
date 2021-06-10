@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Baloo Tammudu 2', cursive;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: #f8f9fa;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    padding-top: 20px;
+}
+
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    color: rgb(226, 226, 266);
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #000;
+}
