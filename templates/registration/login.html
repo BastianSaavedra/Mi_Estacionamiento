@@ -1,0 +1,67 @@
+{% extends 'mi_estacionamiento/base_web.html' %}
+{% load static %}
+{% load svg %}
+
+{% block content%}
+<head>
+    <link rel="stylesheet" href="{% static 'css/loginStyle.css' %}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-info-container">
+            <h1 class="title">
+                Elige como te gustaria Iniciar Sesion
+            </h1>
+            <div class="social-login">
+                <!-- Gmail option -->
+                <div class="social-login-element">
+                    <a href="{% url 'social:begin' 'google-oauth2' %}">
+                        <img src="{% static 'svgs/logos/gmail.svg' %}" alt="gmail-img">
+                        <span>Gmail</span>
+                    </a>
+                </div>
+                <!-- linked in opction-->
+                <div class="social-login-element">
+                    <a href="{% url 'social:begin' 'linkedin-oauth2' %}">
+                        <img src="{% static 'svgs/logos/linkedin.svg' %}" alt="linkedin-img">
+                        <span>Linked In</span>
+                    </a>
+                </div>
+            </div>
+            <div class="social-login mt-2">
+                <!-- GitHub option -->
+                <div class="social-login-element">
+                    <a href="{% url 'social:begin' 'github' %}">
+                        <img src="{% static 'svgs/logos/github.svg' %}" alt="github-img">
+                        <span>GitHub</span>
+                    </a>
+                </div>
+                
+                <!-- Facebook option -->
+                <div class="social-login-element">
+                    <img src="{% static 'svgs/logos/facebook.svg' %}" alt="facebook-img">
+                    <span>Facebook</span>
+                </div> 
+            </div>
+                
+                <!-- Twitter option -->
+                <!-- <div class="social-login-element">
+                    <img src="{% static 'svgs/logos/twitter.svg' %}" alt="twitter-img">
+                    <span>Twitter</span>
+                </div> -->
+            <p>o</p>
+            <form method="POST" class="inputs-container">
+                {% csrf_token %}
+
+                <input name="username" class="input" type="text" placeholder="Usuario">
+                <input name="password" class="input" type="password" placeholder="Contraseña">
+                <p>Olvidaste tu contraseña? <span class="span">Clickea aqui!</span></p>
+                <input class="btn" type="submit" value="Ingresar"></input>
+                <p>No tienes una cuenta? <span class="span">Registrate</span></p>
+            </form>
+        </div>
+        <img class="img-container" src="{% static 'svgs/access_account.svg' %}" alt="login">
+    </div>
+</body>
+
+{% endblock %}

@@ -1,0 +1,156 @@
+{% extends 'mi_estacionamiento/base_web.html' %}
+{% load static %}
+{% load svg %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/indexStyle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gotop.css' %}">
+</head>
+
+<body>
+    <section id="sec1">
+        <div class="contenedor-texto">
+
+            {% if user.is_authenticated %}
+                <h2>Bienvenido @{{ user.username }}</h2>
+                <p>
+                    Haz accedido a tu cuenta en "Mi Estacionamiento" <br>
+                    ahora puedes ocupar nuestras funcionalidades. 
+                    <br>
+                    <br>                    
+                </p>
+                <a href="{% url 'logout' %}">Cerrar Sesion</a>
+                <a href="#">Mi Perfil</a>
+            {% else %}
+                <h2>Bienvenido!</h2>
+                <p>
+                    En "Mi Estacionamiento" puedes crear tu cuenta <br>
+                    para poder acceder a nuestras funciones.
+                </p>
+                <a href="#Register">Registrate</a>
+                <a href="{% url 'login' %}">Iniciar Sesion</a>
+            {% endif %}
+        </div>
+        <img src="{% static 'svgs/welcome.svg' %}" alt="">
+    </section>
+    {% if user.is_authenticated %}
+
+    {% else %}
+    <section id="Register">       
+            <div class="login-container">
+                <div class="login-info-container">
+                    <h1 class="title">
+                        Elige como te gustaria registrarte
+                    </h1>
+                    <div class="social-login">
+                        <!-- Gmail option -->
+                        <div class="social-login-element">
+                            <img src="{% static 'svgs/logos/gmail.svg' %}" alt="gmail-img">
+                            <span>Gmail</span>
+                        </div>
+                        <!-- linked in opction-->
+                        <div class="social-login-element">
+                            <img src="{% static 'svgs/logos/linkedin.svg' %}" alt="linkedin-img">
+                            <span>Linked In</span>
+                        </div>
+                    </div>
+                    <div class="social-login mt-2">
+                        <!-- GitHub option -->
+                        <div class="social-login-element">
+                            <img src="{% static 'svgs/logos/github.svg' %}" alt="github-img">
+                            <span>GitHub</span>
+                        </div>
+                        
+                        <!-- Facebook option -->
+                        <div class="social-login-element">
+                            <img src="{% static 'svgs/logos/facebook.svg' %}" alt="facebook-img">
+                            <span>Facebook</span>
+                        </div> 
+                    </div>
+                        
+                        <!-- Twitter option -->
+                        <!-- <div class="social-login-element">
+                            <img src="{% static 'svgs/logos/twitter.svg' %}" alt="twitter-img">
+                            <span>Twitter</span>
+                        </div> -->
+                    <p>o</p>
+                    <form method="POST" class="inputs-container">
+        
+                        {% csrf_token %}
+                        {# <input name="username"  class="input" type="text"     placeholder="Usuario"> #}
+                        {# <input name="email"     class="input" type="email"    placeholder="Email"> #}
+                        {# <input name="password1" class="input" type="password" placeholder="Contraseña"> #}
+                        {# <input name="password2" class="input" type="password" placeholder="Contraseña"> #}
+			{{ form.username.label }}
+			{{ form.username }}
+			{{ form.email.label }}
+			{{ form.email }}
+			{{ form.password1.label }}
+			{{ form.password1 }}
+			{{ form.password2.label }}
+			{{ form.password2 }}
+			<hr>
+                        <input class="btn" type="submit" value="Registrate"></input>
+                        <p>
+                            Ya tienes cuenta? 
+                            <a href="{% url 'login' %}">
+                                <span class="span">Ingresar</span>
+                            </a> 
+                        </p>
+                    </form>
+                </div>
+            </div>
+            
+         
+        <img src="{% static 'svgs/sign_in.svg' %}" alt="">
+
+    </section>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <section id="sec3">
+        <div class="contenedor-text">
+            <h2>Section 3</h2>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Recusandae libero non voluptatum consequuntur nemo molestias 
+                quasi assumenda quis aliquam aspernatur?
+            </p>
+            <a href="#sec4">Section 4</a>
+        </div>
+        <img src="{% static 'svgs/map_dark.svg' %}" alt=""> 
+    </section>
+    {% else %}
+    {% endif %}
+
+    <section id="Contact">
+      <div class="login-container">
+	<div class="login-info-container">
+	  <h1 class="title">
+	    Necesitas ayuda?
+	  </h1>
+	  <hr class="bg-danger">
+	  <p class="pb-0 mb-0">
+	    No dudes en contactarnos, responderemos lo mas pronto posible
+	  </p>
+	  <p class="text-danger small pt-0 nt-0">
+	    *Todos los campos son obligatorios*
+	  </p>
+	  <form method="POST" class="inputs-container">
+	    {% csrf_token %}
+
+	    {{ contact_form.name }}
+
+	    <input type="submit" class="btn" value="Contactar">
+	  </form>
+	</div>	
+      </div>
+      <img src="{% static 'svgs/contact_us.svg' %}" alt="">
+    </section
+
+
+</body>
+
+{% endblock %}

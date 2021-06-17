@@ -27,6 +27,26 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# REDIRECT URL TO USERS
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_URL = '/'
+
+# GITHUB CONFIG KEYS
+SOCIAL_AUTH_GITHUB_KEY = '1591fcc3ddde67bf3f89'
+SOCIAL_AUTH_GITHUB_SECRET = '76d0a823c3b41fac64d8ed5fdbff22e07b708e42'
+
+# GMAIL CONFIG KEYS
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '26209738158-ip39p1rka0ru4ahuo158fffmqem4vkkq.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'KuNueTrkBy1ka7mItUXxS1cK'
+
+# LINKED IN CONFIG KEYS
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = '86n45t4sayt90n'
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'ZqgvrjfsWg1MZegY'
+
 
 # Application definition
 
@@ -38,8 +58,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
-    'svg'
+    'session.apps.SessionConfig',
+    'addresses',
+    'svg',
+    'social_django',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'uni_form'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'MiEstacionamiento.urls'
@@ -56,7 +83,7 @@ ROOT_URLCONF = 'MiEstacionamiento.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['./templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,9 +91,19 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.linkedin.LinkedinOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend'
 ]
 
 WSGI_APPLICATION = 'MiEstacionamiento.wsgi.application'
@@ -122,9 +159,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # SVG DIRS
-SVG_DIRS = [
-    os.path.join(BASE_DIR, 'my-svg')
-]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

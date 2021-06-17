@@ -7,3 +7,9 @@ lo puedan disponer para arriendo, lo que les permitiría generar un ingreso extr
 de tener un lugar seguro donde estacionar su vehículo. Por otro lado, puede existir la posibilidad de que el automovilista esté
 buscando estacionamiento municipales y/o privados, por lo cual debe tener la posibilidad de poder ver los estacionamientos
 disponibles en su cercanía.
+
+# Usuario Administrador
+
+Name: admin
+mail: admin@admin.com
+passwd: admin

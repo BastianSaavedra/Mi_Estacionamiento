@@ -6,5 +6,6 @@ from home import views
 
 
 urlpatterns = [
-    path('', views.index, name="index-html")
+    path('', views.index, name="index-html"),
+    path('contact/', views.contact, name="contact"),
 ]

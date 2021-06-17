@@ -4,3 +4,5 @@ django==3.2.3
 django-inline-svg==0.1.1
 djangorestframework==3.12.4
 django-svg-templatetag==1.0.1
+social-auth-app-django==4.0.0
+

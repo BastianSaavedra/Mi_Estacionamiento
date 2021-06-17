@@ -1,4 +1,4 @@
-#!c:\users\basti\workspace\gestionagilproyecto\mi_estacionamiento\env\scripts\python.exe
+#!G:\Workspace\GestionAgilProyecto\Mi_Estacionamiento\env\Scripts\python.exe
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
