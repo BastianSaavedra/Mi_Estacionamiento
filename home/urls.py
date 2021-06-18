@@ -2,10 +2,12 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from home import views
+from .views import index, contact, AddressView 
 
 
 urlpatterns = [
-    path('', views.index, name="index-html"),
-    path('contact/', views.contact, name="contact"),
+    path('', index, name="index-html"),
+    path('contact/', contact, name="contact"),
+    path('map/', AddressView.as_view(), name="map-box"),
+
 ]

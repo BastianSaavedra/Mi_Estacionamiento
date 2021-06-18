@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
-from .models import Address
+from addresses.models import Address
 
 class AddressView(CreateView):
     model = Address
     fields = ['address']
-    template_name = 'addresses/map.html'
-    success_url = '/'
+    template_name = 'mi_estacionamiento/index.html'
+    success_url = 'index-html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

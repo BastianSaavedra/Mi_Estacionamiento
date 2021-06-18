@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'session.apps.SessionConfig',
-    'addresses',
+    'addresses.apps.AddressesConfig',
     'svg',
     'social_django',
     'crispy_forms',
@@ -148,7 +148,7 @@ TIME_ZONE = 'America/Santiago'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 

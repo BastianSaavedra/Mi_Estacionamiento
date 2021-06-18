@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CreateUserForm, ContactForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.views.generic.edit import CreateView
+from .models import Address
+
 # Create your views here.
 
 """
@@ -61,3 +64,16 @@ def contact(request):
             data
         )
 
+# Class CreateView Address
+class AddressView(CreateView):
+
+    model = Address
+    fields = ['address']
+    template_name = 'mi_estacionamiento/index.html'
+    success_url = 'index-html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['mapbox_access_token'] = 'pk.eyJ1Ijoia2l6c2F3YSIsImEiOiJja3EwaTFjYnYwNTFuMm5xZzA4M3ZtNzhiIn0.jmj0NkJgDkqIgatSVz-wSw'
+        context['addresses'] = Address.objects.all()
+        return context
