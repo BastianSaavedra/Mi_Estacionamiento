@@ -1,0 +1,9 @@
+* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+}
+
+#sec-map {
+	background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100% );
+}

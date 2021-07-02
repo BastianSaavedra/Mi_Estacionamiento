@@ -1,15 +1,24 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
-from addresses.models import Address
+from .models import Address
+from django import forms
+
+# Create your views here.
 
 class AddressView(CreateView):
-    model = Address
-    fields = ['address']
-    template_name = 'mi_estacionamiento/index.html'
-    success_url = 'index-html'
     
+    model = Address
+    fields = ['park_address']
+    template_name = 'addresses/map.html'
+    success_url = "/"
+    widgets = {
+        'direccion': forms.TextInput(attrs={'class': 'input'}),
+    }
+
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['mapbox_access_token'] = 'pk.eyJ1Ijoia2l6c2F3YSIsImEiOiJja3EwaTFjYnYwNTFuMm5xZzA4M3ZtNzhiIn0.jmj0NkJgDkqIgatSVz-wSw'
+        context['mapbox_access_token'] = 'pk.eyJ1Ijoia2l6c2F3YSIsImEiOiJja3E3Mmhlc2swMjI1Mm91aHlybGI4dTl4In0.sW8qKEWwBNgrTyjT8TWDqQ'
         context['addresses'] = Address.objects.all()
         return context
+

@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CreateUserForm, ContactForm
+from .forms import CreateUserForm, ContactForm, PaymentForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.views.generic.edit import CreateView
-from .models import Address
+
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.urls import reverse
+from .models import Owner, Client
+
+
+
 
 # Create your views here.
 
@@ -12,7 +17,8 @@ from .models import Address
 
     username = request.POST.get["variable creadad en index"]
 """
-def index(request):
+
+def register(request):
     data = {
         'form': CreateUserForm()
     }
@@ -38,11 +44,11 @@ def index(request):
         data["form"] = formulario
     return render(
         request,
-        'mi_estacionamiento/index.html',
+        'registration/register.html',
         data
     )
 
-def contact(request):
+def index(request):
     data = {
         'contact_form':ContactForm()
     }
@@ -64,16 +70,93 @@ def contact(request):
             data
         )
 
-# Class CreateView Address
-class AddressView(CreateView):
+def add_card(request):
+    data = {
+        'payment_form': PaymentForm()
+    }
+    if request.method == "POST":
+        form = PaymentForm(
+            data = request.POST,
+        )
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request,
+                "Targeta agregada exitosamente"
+            )
+        else:
+            data["payment_form"] = form
+    return render(
+        request,
+        'user/card_user.html',
+        data
+    )
 
-    model = Address
-    fields = ['address']
-    template_name = 'mi_estacionamiento/index.html'
-    success_url = 'index-html'
+# VIEWS MULTI STEP HTML REGISTER
+#
+def multistepformexample(request):
+    return render(
+        request,
+        "registration/multi_step_registration.html"
+    )
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['mapbox_access_token'] = 'pk.eyJ1Ijoia2l6c2F3YSIsImEiOiJja3EwaTFjYnYwNTFuMm5xZzA4M3ZtNzhiIn0.jmj0NkJgDkqIgatSVz-wSw'
-        context['addresses'] = Address.objects.all()
-        return context
+def multistepformexample_save(request):
+    if request.method!="POST":
+        return HttpResponseRedirect(
+
+            reverse("multistepformexample")
+        )
+    else:
+        # Personal Information
+        name = request.POST.get('name')
+        last_name = request.POST.get('last_name')
+        phone = request.POST.get('phone')
+        
+        # Address Details
+        type_home = request.POST.get('type_home')
+        address = request.POST.get('address')
+        park_address = request.POST.get('park_address')
+
+        # Credit card Details
+        cc_number = request.POST.get('cc_number')
+        cc_expiry = request.POST.get('cc_expiry')
+        cc_code = request.POST.get('cc_code')
+        
+        # Account Information
+        email = request.POST.get('email')
+        password = request.POST.get('pass')
+        cpass = request.POST.get('cpass')
+        if password!=cpass:
+            messages.error(request, "Contraseña de confirmacion no coincide")
+            return HttpResponseRedirect(reverse('multistepformexample'))
+
+        try:
+            multistepform =  Owner(
+                name=name,
+                last_name=last_name,
+                email=email,
+                phone=phone,
+                address=address,
+                cc_number=cc_number,
+                cc_expiry=cc_expiry,
+                cc_code=cc_code,
+                type_home=type_home,
+                park_address=park_address,
+                password=password,
+            )
+            multistepform.save()
+            messages.success(request, "Registro guardado correctamente")
+            return HttpResponseRedirect(reverse('multistepformexample'))
+        except:
+            messages.error(request, "Error al guardar el registro")
+            return HttpResponseRedirect(reverse('multistepformexample'))
+
+
+def multistepformexampleclient(request):
+    return render(
+        request,
+        "registration/multi_step_registration_client.html"
+    )
+
+def multistepformexampleclient_save(request):
+    pass

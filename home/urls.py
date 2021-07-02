@@ -2,12 +2,12 @@
 
 from django.contrib import admin
 from django.urls import path, include
-from .views import index, contact, AddressView 
+from .views import index, register, add_card
 
 
 urlpatterns = [
     path('', index, name="index-html"),
-    path('contact/', contact, name="contact"),
-    path('map/', AddressView.as_view(), name="map-box"),
+    path('register-user/', register, name="register-user"),
+    path('card/', add_card, name="user-card")
 
 ]

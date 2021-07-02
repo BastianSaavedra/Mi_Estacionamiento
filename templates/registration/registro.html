@@ -1,0 +1,15 @@
+{% extends 'mi_estacionamiento/base_web.html' %}
+{% load static %}
+{% block content %}
+<head>
+
+</head>
+<body>
+	<form method="POST" action="{% url 'owner-register' %}"> 
+		{% csrf_token %}
+
+		{{ owner_register_form.as_p }}
+		<input type="submit" value="Crear nueva cuenta">
+	</form>
+</body>
+{% endblock %}

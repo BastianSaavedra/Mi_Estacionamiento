@@ -1,0 +1,68 @@
+{% extends 'mi_estacionamiento/base_web.html' %}
+{% load static %}
+{% load svg %}
+{% block content %}
+{% load crispy_forms_tags %}
+<head>
+  <link rel="stylesheet" href="{% static 'css/loginStyle.css' %}">
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-info-container">
+      <h1 class="title">
+	Elige como te gustaria registrarte
+      </h1>
+      <div class="social-login">
+	<!-- Gmail Option -->
+	<div class="social-login-element">
+          <a href="{% url 'social:begin' 'google-oauth2' %}">
+            <img src="{% static 'svgs/logos/gmail.svg' %}" alt="gmail-img">
+            <span>Gmail</span>
+          </a>
+        </div>
+                
+	<!-- linked in opction-->
+        <div class="social-login-element">
+          <a href="{% url 'social:begin' 'linkedin-oauth2' %}">
+	    <img src="{% static 'svgs/logos/linkedin.svg' %}" alt="linkedin-img">
+            <span>Linked In</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Segunda Seccion -->
+      <div class="social-login mt-2">
+        <!-- GitHub option -->
+        <div class="social-login-element">
+	  <a href="{% url 'social:begin' 'github' %}">
+	    <img src="{% static 'svgs/logos/github.svg' %}" alt="github-img">
+	    <span>GitHub</span>
+	  </a>
+        </div>        
+        <!-- Facebook option -->
+        <div class="social-login-element">
+	  <a href="#">
+	    <img src="{% static 'svgs/logos/facebook.svg' %}" alt="facebook-img">
+	    <span>Facebook</span>
+	  </a>
+        </div> 
+      </div>
+	
+      <p>o</p>
+
+      <form method="POST" class="inputs-container">
+	{% csrf_token %}
+
+	  {{ form | crispy }}
+
+	  <input type="submit" class="btn mt-3" value="Registrarte">
+      </form>
+	
+      </div>
+      <img class="img-container" src="{% static 'svgs/access_account.svg' %}" alt="register">
+    </div>
+    
+  </div>
+</body>
+
+{% endblock %}

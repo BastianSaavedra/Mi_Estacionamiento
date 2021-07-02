@@ -57,9 +57,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home.apps.HomeConfig',
+    'home',
     'session.apps.SessionConfig',
-    'addresses.apps.AddressesConfig',
+    'addresses',
     'svg',
     'social_django',
     'crispy_forms',
@@ -112,10 +112,21 @@ WSGI_APPLICATION = 'MiEstacionamiento.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Mi_Estacionamiento',
+        'USER': 'root',
+        'PASSWORD': 'fq3jnvrmdyf',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 

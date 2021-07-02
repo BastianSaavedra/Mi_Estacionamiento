@@ -57,7 +57,14 @@
                 <input name="password" class="input" type="password" placeholder="Contraseña">
                 <p>Olvidaste tu contraseña? <span class="span">Clickea aqui!</span></p>
                 <input class="btn" type="submit" value="Ingresar"></input>
-                <p>No tienes una cuenta? <span class="span">Registrate</span></p>
+		<p>
+		  No tienes una cuenta? 
+		  <span class="span">
+		    <a style="text-decoration: none;" href="{% url 'register-user' %}">
+		      Registrate
+		    </a>
+		  </span>
+		</p>
             </form>
         </div>
         <img class="img-container" src="{% static 'svgs/access_account.svg' %}" alt="login">

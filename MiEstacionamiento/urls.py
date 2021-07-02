@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from home import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +25,14 @@ urlpatterns = [
     path('accounts/', include('session.urls')),
     path('social-auth/', include('social_django.urls', namespace='social')),
     path('', include('addresses.urls')),
+
+
+
+    # Multi step form url's Owner
+    path('multistepformexample', views.multistepformexample, name="multistepformexample"),
+    path('multistepformexample_save', views.multistepformexample_save, name="multistepformexample_save"),
+
+    # Multi step form ulr's Client
+    path('multistepformexampleclient', views.multistepformexampleclient, name="multistepformexampleclient"),
+    path('multistepformexampleclient_save', views.multistepformexampleclient_save, name="multistepformexampleclient_save" ),
 ]
